@@ -45,8 +45,8 @@ class DocController extends Controller
         
         // إنشاء السجل في قاعدة البيانات مع حفظ الروابط
         $doc = Doc::create([
-            'img' => asset('storage/' . $imagePath), // حفظ الرابط العام للصورة
-            'cv' => $cvPath ? asset('storage/' . $cvPath) : null, // حفظ الرابط العام للسيرة الذاتية (إن كانت موجودة)
+            'img' => asset('/storage/app/public/' . $imagePath), // حفظ الرابط العام للصورة
+            'cv' => $cvPath ? asset('/storage/app/public/' . $cvPath) : null, // حفظ الرابط العام للسيرة الذاتية (إن كانت موجودة)
             'name_ar' => $request->name_ar,
             'name_en' => $request->name_en,
             'specialist_id' => $request->specialist_id,
