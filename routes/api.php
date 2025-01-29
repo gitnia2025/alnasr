@@ -8,6 +8,8 @@ use App\Http\Controllers\OfferController;
 use App\Http\Controllers\NumController;
 use App\Http\Controllers\LabController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\ContactController;
+
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -34,3 +36,5 @@ Route::apiResource('numbers', NumController::class);
 Route::apiResource('labs', LabController::class);
 // feedback Routes
 Route::apiResource('feedback', FeedbackController::class);
+//contact Routes
+Route::resource('contacts', ContactController::class);
