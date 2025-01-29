@@ -19,6 +19,7 @@ class DocController extends Controller
             'specialist_id' => 'required|exists:specialists,id',
             'phone' => 'required|string',
             'whats' => 'required|string',
+            'floor' => 'required|string',
             'age' => 'required|integer',
             'sex' => 'required|in:male,female',
             'day_en' => 'nullable|string|max:255', // حقل يوم الأسبوع بالإنجليزية اختياري
@@ -53,6 +54,7 @@ class DocController extends Controller
             'whats' => $request->whats,
             'age' => $request->age,
             'sex' => $request->sex,
+            'floor' => $request->floor ?? 'no determine',
             'day_en' => $request->day_en ?? 'not specified', // تعيين قيمة افتراضية إذا لم يتم تحديدها
             'day_ar' => $request->day_ar ?? 'غير محدد', // تعيين قيمة افتراضية إذا لم يتم تحديدها
             'specialist_ar' => $request->specialist_ar ?? 'غير محدد', // تعيين قيمة افتراضية لحقل specialist_ar

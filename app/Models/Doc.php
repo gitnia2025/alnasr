@@ -10,7 +10,7 @@ class Doc extends Model
 
     protected $fillable = [
         'img', 'name_ar', 'name_en', 'specialist_ar', 'specialist_en', 'desc_ar', 'desc_en',
-        'phone', 'whats', 'age', 'sex', 'day_en', 'day_ar', 'time_from', 'time_to', 
+        'phone', 'whats', 'age', 'sex', 'day_en', 'day_ar', 'time_from', 'time_to', 'floor',
         'certificate_ar', 'certificate_en', 'exp_ar', 'exp_en', 'cv', 'active', 'show', 'specialist_id'
     ];
 

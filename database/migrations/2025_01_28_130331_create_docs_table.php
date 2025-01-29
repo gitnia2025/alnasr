@@ -35,7 +35,8 @@ return new class extends Migration
             $table->string('cv')->nullable();  // ملف السيرة الذاتية
             $table->boolean('active')->default(true);
             $table->boolean('show')->default(true);
-            
+            $table->string('floor');
+
             // العلاقة مع التخصص (specialist)
             $table->foreignId('specialist_id')->constrained('specialists')->onDelete('cascade');
             
