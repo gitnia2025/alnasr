@@ -21,57 +21,36 @@ class OfferController extends Controller
         return response()->json($offers);
     }
 
-    /**
-     * إنشاء عرض جديد.
-     */
-    // public function store(Request $request)
-    // {
-    //     // التحقق من البيانات المدخلة
-    //     $validated = $request->validate([
-    //         'img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // التحقق من الصورة
-    //         'description' => 'required|string|max:255', // التحقق من الوصف
-    //         // أضف باقي الحقول المطلوبة هنا
-    //     ]);
-
-    //     // حفظ الصورة في التخزين (أو استخدام طريقة تخزين أخرى مثل السحابة)
-    //     $imagePath = $request->file('img')->store('offers', 'public');
-        
-    //     // إنشاء العرض الجديد
-    //     $offer = Offer::create([
-    //         'img' => $imagePath, // حفظ مسار الصورة في قاعدة البيانات
-    //         'description' => $validated['description'],
-    //         // أضف الحقول الأخرى المطلوبة هنا
-    //     ]);
-
-    //     // إرجاع العرض الذي تم إنشاؤه مع حالة 201
-    //     return response()->json($offer, 201);
-    // }
+    
     public function store(Request $request)
     {
         // التحقق من البيانات المدخلة
         $validated = $request->validate([
             'img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // التحقق من الصورة
-            'description' => 'required|string|max:255', // التحقق من الوصف
-            // أضف باقي الحقول المطلوبة هنا
+            'doc_id' => 'required|exists:docs,id', // تحقق من وجود الـ doc_id في جدول documents
         ]);
     
-        // حفظ الصورة في التخزين (مجلد offers داخل التخزين العام)
-        $imagePath = $request->file('img')->store('offers', 'public'); // تخزين الصورة داخل مجلد offers
+        // تحقق من وجود الملف في الطلب
+        if (!$request->hasFile('img')) {
+            return response()->json(['error' => 'No image file provided.'], 400);
+        }
     
-        // الحصول على الرابط العام للصورة بعد تخزينها
-        $imageUrl = asset('storage/' . $imagePath); // الرابط العام للصورة
+        // حفظ الصورة في التخزين
+        $imagePath = $request->file('img')->store('offers', 'public');
     
-        // إنشاء العرض الجديد وتخزين مسار الرابط في قاعدة البيانات
+        // الحصول على الرابط العام للصورة
+        $imageUrl = asset('storage/' . $imagePath);
+    
+        // إنشاء العرض الجديد
         $offer = Offer::create([
-            'img' => $imageUrl, // حفظ رابط الصورة في قاعدة البيانات
-            'description' => $validated['description'],
-            // أضف الحقول الأخرى المطلوبة هنا
+            'img' => $imageUrl,
+            'doc_id' => $validated['doc_id'],
         ]);
     
-        // إرجاع العرض الذي تم إنشاؤه مع حالة 201
         return response()->json($offer, 201);
     }
     
+
     /**
      * عرض تفاصيل عرض معين.
      */

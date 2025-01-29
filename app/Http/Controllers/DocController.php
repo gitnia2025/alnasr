@@ -7,44 +7,7 @@ use Illuminate\Http\Request;
 
 class DocController extends Controller
 {
-    // Create a new Doc
-    // public function store(Request $request)
-    // {
-    //     $request->validate([
-    //         'img' => 'required|string',
-    //         'name_ar' => 'required|string|max:255',
-    //         'name_en' => 'required|string|max:255',
-    //         'specialist_id' => 'required|exists:specialists,id',
-    //         'phone' => 'required|string',
-    //         'whats' => 'required|string',
-    //         'age' => 'required|integer',
-    //         'sex' => 'required|in:male,female',
-    //     ]);
-
-    //     $doc = Doc::create([
-    //         'img' => $request->img,
-    //         'name_ar' => $request->name_ar,
-    //         'name_en' => $request->name_en,
-    //         'specialist_id' => $request->specialist_id,
-    //         'phone' => $request->phone,
-    //         'whats' => $request->whats,
-    //         'age' => $request->age,
-    //         'sex' => $request->sex,
-    //         'day_en' => $request->day_en,
-    //         'day_ar' => $request->day_ar,
-    //         'time_from' => $request->time_from,
-    //         'time_to' => $request->time_to,
-    //         'certificate_ar' => $request->certificate_ar,
-    //         'certificate_en' => $request->certificate_en,
-    //         'exp_ar' => $request->exp_ar,
-    //         'exp_en' => $request->exp_en,
-    //         'cv' => $request->cv,
-    //         'active' => $request->active ?? true,
-    //         'show' => $request->show ?? true,
-    //     ]);
-
-    //     return response()->json($doc, 201);
-    // }
+    
     public function store(Request $request)
     {
         // التحقق من البيانات المدخلة
@@ -102,6 +65,9 @@ class DocController extends Controller
             'exp_en' => $request->exp_en ?? 'No experience', // تعيين قيمة افتراضية إذا لم يتم تحديدها
             'active' => $request->active ?? true, // تعيين قيمة افتراضية
             'show' => $request->show ?? true, // تعيين قيمة افتراضية
+            'desc_ar'=>  $request->desc_ar ?? 'غير محدد',
+            'desc_en'=>  $request->desc_ar ?? ' Not specified',
+
         ]);
         
         // إرجاع السجل الذي تم إنشاؤه مع حالة 201
